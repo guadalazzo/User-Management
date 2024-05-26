@@ -1,0 +1,15 @@
+# misc
+.DS_Store
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Jest coverage directory
+.coverage*
+coverage*
+/coverage*
+# local env files
+.env*.local
