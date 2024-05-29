@@ -1,0 +1,82 @@
+@import '../variables';
+
+.modal-wrapper {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(107, 114, 128, 0.5);
+  z-index: 9;
+  width: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  .modal {
+    width: 50%;
+    height: 80%;
+    background-color: $white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 26px;
+    font-size: 30px;
+    font-weight: 400;
+    color: $gray;
+  }
+  .header {
+    padding: 2em;
+    border-bottom: 1px solid $bordergray;
+  }
+  .content {
+    overflow: scroll;
+    height: 60%;
+  }
+  .select-user {
+    display: flex;
+    gap: 1em;
+    padding: 1em;
+    border-bottom: 1px solid $bordergray;
+  }
+  .btn {
+    align-self: end;
+    margin: 26px;
+    background: $blue;
+    color: $white;
+  }
+}
+.search {
+  display: flex;
+  border: 1px solid $bordergray;
+  justify-content: space-between;
+  height: 35px;
+  margin: 2em auto;
+  width: 90%;
+  img {
+    display: block;
+    padding: 5px;
+    width: 35px;
+    color: $gray;
+    border-left: 1px solid $bordergray;
+  }
+  input {
+    background: none;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  .bottom-err {
+    width: 80%;
+    margin: 2em auto;
+  }
+}

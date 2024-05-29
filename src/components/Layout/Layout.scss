@@ -1,5 +1,5 @@
 @import '../variables';
-#root { 
+#root {
   width: 100%;
 }
 nav {
@@ -16,24 +16,29 @@ nav {
 .layout {
   display: block;
   background-color: $bg-color;
-  position: relative;
+  min-height: 93vh;
 }
 .main-content {
   margin: auto;
-  width: 80%;
+  width: 90%;
   padding-top: 2rem;
   h2 {
     margin-top: 1em;
   }
 }
+.content {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 2em;
+}
+
 .btn {
-  background-color: $primary;
-  color: $white;
   padding: 10px;
-  font-weight: 600;
-  border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   margin-top: 1em;
+  border: 1px solid $bordergray;
+  width: fit-content;
+  border-radius: 5px;
 }
 .error-message {
   color: red;

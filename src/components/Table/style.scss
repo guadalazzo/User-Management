@@ -1,0 +1,41 @@
+@import '../variables';
+
+.cultivations-table {
+  width: 100%;
+  background-color: $white;
+  border-radius: 5px;
+  box-shadow: none;
+  text-align: left;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  thead {
+    background-color: $lightgray;
+    border-bottom: none;
+    tr {
+      border-bottom: 1px solid $bordergray;
+    }
+  }
+  tbody tr {
+    border-bottom: 1px solid $bordergray;
+  }
+  thead tr th {
+    padding: 1em;
+  }
+  &_row td {
+    padding: 12px;
+  }
+  &_row .edit {
+    text-align: center;
+    a,
+    button {
+      color: $lightblue;
+    }
+  }
+  &_row button img {
+    display: block;
+    width: 15px;
+  }
+  .empty-state {
+    padding: 10px;
+  }
+}

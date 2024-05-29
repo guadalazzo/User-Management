@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTES } from './utils/consts';
 import Layout from './components/Layout/Layout';
 import Cultivations from './pages/Cultivations';
-import EditCultivation from './pages/Cultivations/Edit';
+import EditCultivation from './pages/Edit';
 function App() {
   return (
     // <Provider store={store}>

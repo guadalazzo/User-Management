@@ -5,37 +5,3 @@
   justify-content: space-between;
   align-items: flex-end;
 }
-.cultivations-table {
-  background-color: $white;
-  width: 100%;
-  border-radius: 5px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  text-align: left;
-  border-collapse: collapse;
-  margin-top: 2rem;
-  thead {
-    background-color: $lightgray;
-    tr {
-      border-bottom: 1px solid $bordergray;
-    }
-  }
-  tbody tr {
-    border-bottom: 1px solid $bordergray;
-  }
-  thead tr th {
-    padding: 1em;
-  }
-  &_row td {
-    padding: 0.5em;
-  }
-  &_row .edit {
-    text-align: center;
-  }
-  &_row button img {
-    display: block;
-    width: 15px;
-  }
-  .empty-state {
-    padding: 10px;
-  }
-}

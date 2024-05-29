@@ -1,0 +1,25 @@
+@import '../variables';
+
+$colors: rgb(124, 105, 48), rgb(235, 91, 69), rgb(247, 99, 178), rgb(54, 113, 60), blue, rgb(165, 86, 165);
+$repeat: 20;
+
+.avatar {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  padding: 3px;
+  margin-right: 5px;
+}
+@for $i from 1 through $repeat {
+  li:nth-child(#{length($colors)}n + #{$i}) .avatar,
+  tr:nth-child(#{length($colors)}n + #{$i}) .avatar {
+    background: lighten(nth($colors, random(length($colors))), 20%);
+    color: lighten(nth($colors, random(length($colors))), 60%);
+  }
+}
+.you {
+  margin-left: 5px;
+  color: $gray;
+}

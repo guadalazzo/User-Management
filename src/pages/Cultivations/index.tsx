@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getCultivations } from '../../services';
 import { cultivation } from '../../types';
+import Table from './../../components/Table/Table';
 import './styles.scss';
 
 export default function Cultivations() {
@@ -23,34 +24,26 @@ export default function Cultivations() {
   }, []);
 
   return (
-    <div className="main-content">
-      <div className="">
+    <article className="main-content">
+      <div className="card">
         <h2>Cultivations</h2>
-        <table className="cultivations-table">
-          <thead>
-            <tr>
-              <th>Cultivation name</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {!cultivations.length ? (
-              <li>No available results</li>
-            ) : (
-              cultivations.map((cultivation) => {
-                return (
-                  <tr className="cultivations-table_row">
-                    <td>{cultivation?.name}</td>
-                    <td className="edit">
-                      <Link to={`/edit/${cultivation?.id}`}>Edit</Link>
-                    </td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
+        {!cultivations.length ? (
+          <div>No available results</div>
+        ) : (
+          <Table columns={['Cultivation name', '']}>
+            {cultivations.map((cultivation) => {
+              return (
+                <tr className="cultivations-table_row">
+                  <td>{cultivation?.name}</td>
+                  <td className="edit">
+                    <Link to={`/edit/${cultivation?.id}`}>Edit</Link>
+                  </td>
+                </tr>
+              );
+            })}
+          </Table>
+        )}
       </div>
-    </div>
+    </article>
   );
 }

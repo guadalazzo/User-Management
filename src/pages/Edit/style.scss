@@ -1,0 +1,11 @@
+@import '../../components/variables';
+
+.card {
+  background: $white;
+  width: 90%;
+  margin: auto;
+  h2 {
+    padding: 1em;
+    border-bottom: 1px solid $bordergray;
+  }
+}

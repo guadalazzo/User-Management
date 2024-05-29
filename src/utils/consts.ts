@@ -9,3 +9,10 @@ export const ROUTES = {
   BASE_URL: '/',
   CULTIVATION_EDIT: '/edit/:id',
 };
+export const ROLES = {
+  HEAD_GROWER: 'Head grower',
+  GROWER: 'Grower',
+  GUEST: 'Guest',
+  OBSERVER: 'Observer',
+  WHOLESALER: 'Wholesaler',
+};
