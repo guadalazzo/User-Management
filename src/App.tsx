@@ -5,6 +5,7 @@ import { ROUTES } from './utils/consts';
 import Layout from './components/Layout/Layout';
 import Cultivations from './pages/Cultivations';
 import EditCultivation from './pages/Edit';
+
 function App() {
   return (
     <Provider store={store}>

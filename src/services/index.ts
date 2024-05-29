@@ -1,5 +1,5 @@
 import { API_URL, headers, METHODS } from '../utils/consts';
-import { addUserPayload, Role } from '../types';
+import { addUserPayload } from '../types';
 
 export const getCultivations = async () => {
   try {

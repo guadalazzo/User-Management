@@ -13,7 +13,7 @@ export default function RoleSelector({
 }: {
   name: string;
   userId: number;
-  onChange: () => void;
+  onChange: (message?: string) => void;
 }) {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [cultivationRoles, setcultivationRoles] = useState<Role[]>([]);
@@ -30,6 +30,9 @@ export default function RoleSelector({
         setSelectedItem(currentRole);
       }
     }
+    return () => {
+      setOpen(false);
+    };
   }, []);
 
   const toggleDropdown = () => setOpen(!isOpen);
@@ -39,8 +42,12 @@ export default function RoleSelector({
       selectedItem?.id === id ? setSelectedItem(null) : setSelectedItem(currentRole);
       try {
         if (cultivationId) {
-          await updateRole(cultivationId, { role: { id: currentRole.id } }, userId);
-          onChange();
+          const response = await updateRole(cultivationId, { role: { id: currentRole.id } }, userId);
+          if (response?.error?.message) {
+            onChange(response.error.message);
+          } else {
+            onChange();
+          }
         }
       } catch (e) {
         console.error('Error with Role upate', e);

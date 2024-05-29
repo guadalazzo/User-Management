@@ -74,7 +74,12 @@ export default function EditCultivation() {
       setLoading(false);
     }
   };
-  const handleChange = () => {
+
+  const handleChange = (message?: string) => {
+    setErrorMessage('');
+    if (message) {
+      setErrorMessage(message);
+    }
     if (id) {
       loadCultivationUsers(id);
     }
@@ -87,6 +92,8 @@ export default function EditCultivation() {
     getRoles();
     return () => {
       // on unmount
+      setErrorMessage('');
+      setToggleUserAddition(false);
     };
   }, []);
 
