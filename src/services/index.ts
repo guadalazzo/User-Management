@@ -1,5 +1,5 @@
 import { API_URL, headers, METHODS } from '../utils/consts';
-import { addUserPayload } from '../types';
+import { addUserPayload, Role } from '../types';
 
 export const getCultivations = async () => {
   try {
@@ -32,7 +32,8 @@ export const addCultivationUsers = async (cultivation_id: string, payload: addUs
     const parsedRes = await cultivationUsers.json();
     return parsedRes;
   } catch (e) {
-    console.error('error:', e);
+    console.error('Failed to add cultivation users:', e);
+    return { error: { message: 'Failed to add cultivation users. Please try again later.' } };
   }
 };
 
@@ -48,7 +49,7 @@ export const deleteUserFromCultivation = async (cultivation_id: string, userId: 
     const parsedRes = await response.json();
     return parsedRes;
   } catch (e) {
-    console.error('error:', e);
+    return { error: { message: 'Failed to add cultivation users. Please try again later.' } };
   }
 };
 
@@ -69,5 +70,22 @@ export const getCultivationRoles = async () => {
     return parsedRes;
   } catch (e) {
     console.error('error:', e);
+  }
+};
+
+export const updateRole = async (cultivation_id: string, payload: { role: { id: number } }, userId: number) => {
+  //PUT /cultivations/<cultivation_id>/users/<user_id>: update the role of a user in the cultivation.
+
+  try {
+    const requestOptions = {
+      ...headers,
+      method: METHODS.PUT,
+      body: JSON.stringify(payload),
+    };
+    const roles = await fetch(`${API_URL}/cultivations/${cultivation_id}/users/${userId}`, requestOptions);
+    const parsedRes = await roles.json();
+    return parsedRes;
+  } catch (e) {
+    return { error: { message: 'Error updating the role' } };
   }
 };

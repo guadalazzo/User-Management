@@ -1,11 +1,12 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUsers, addCultivationUsers, getCultivationRoles } from '../../services';
+import { getUsers, addCultivationUsers } from '../../services';
 import { debounce } from '../../utils';
-import { Role, User, cultivationUsers } from '../../types/index';
+import { Role, User, cultivationUsers, reducer } from '../../types/index';
 import UserView from '../UserView/UserView';
 import './style.scss';
 import { ROLES } from '../../utils/consts';
+import { useSelector } from 'react-redux';
 
 export default function UserAddition({
   currentUsers,
@@ -19,7 +20,7 @@ export default function UserAddition({
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-
+  const roles = useSelector<reducer>((state) => state.cultivations.roles) as Role[];
   const [usersFiltered, setUsersFiltered] = useState<User[]>([]);
   const [userName, setUserName] = useState<string>('');
   const [checkedItems, setCheckedItems] = useState<{ [key: string]: boolean }>({});
@@ -46,6 +47,15 @@ export default function UserAddition({
       setLoading(false);
     }
   };
+  useEffect(() => {
+    loadAllUsers();
+    document.body.style.overflow = 'hidden';
+    document.body.scrollTop = 0;
+    return () => {
+      document.body.style.overflow = 'auto';
+      setCheckedItems({});
+    };
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckedItems({
@@ -53,15 +63,6 @@ export default function UserAddition({
       [event.target.name]: event.target.checked,
     });
   };
-
-  useEffect(() => {
-    loadAllUsers();
-    document.body.style.overflow = 'hidden';
-    document.body.scrollTop = 0;
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
 
   const filterUsers = (name: string) => {
     const lowerCaseName = name.toLowerCase();
@@ -76,49 +77,53 @@ export default function UserAddition({
   const debouncedFilterUsers = useMemo(() => debounce(filterUsers, 400), [userName]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
-    debouncedFilterUsers(e.target.value);
+    if (typeof e.target.value === 'string') {
+      setUserName(e.target.value);
+      debouncedFilterUsers(e.target.value);
+    }
   };
 
   const handleAdd = async () => {
     try {
       setLoading(true);
-      const roles = await getCultivationRoles();
-      const Observer: Role = roles.find((role: Role) => role.name === ROLES.OBSERVER);
+
+      const Observer: Role | undefined = roles.find((role: Role) => role.name === ROLES.OBSERVER);
 
       // Get list of user IDs checked
       const filteredCheckedUsers = Object.keys(checkedItems).filter((user) => checkedItems[user]);
 
       // Prepare the payload for each user
-      const payloads = filteredCheckedUsers.map((userId: string) => ({
-        role: { id: Observer.id },
-        user: { id: Number(userId) },
-      }));
+      if (Observer) {
+        const payloads = filteredCheckedUsers.map((userId: string) => ({
+          role: { id: Observer.id },
+          user: { id: Number(userId) },
+        }));
 
-      // map over payloads and use Promise.all to wait for all async calls to complete
-      const usersList = await Promise.all(
-        payloads.map(async (payload) => {
-          if (id) {
-            try {
-              // add each user to the cultivation
-              const userAdded = await addCultivationUsers(id, payload);
-              if (userAdded.cultivation_id) {
-                return userAdded;
-              } else {
-                setErrorMessage(userAdded?.error);
+        // map over payloads and use Promise.all to wait for all async calls to complete
+        const usersList = await Promise.all(
+          payloads.map(async (payload) => {
+            if (id) {
+              try {
+                // add each user to the cultivation
+                const userAdded = await addCultivationUsers(id, payload);
+                if (userAdded.cultivation_id) {
+                  return userAdded;
+                } else {
+                  setErrorMessage(userAdded?.error);
+                }
+              } catch (e) {
+                setErrorMessage(`${e}`);
+                console.error('Error adding the user:', e);
               }
-            } catch (e) {
-              setErrorMessage(`${e}`);
-              console.error('Error adding the user:', e);
             }
-          }
-        }),
-      );
-      // Update list to update edit page
-      const validUsersList = usersList.filter(Boolean) as cultivationUsers[];
+          }),
+        );
+        // Update list to update edit page
+        const validUsersList = usersList.filter(Boolean) as cultivationUsers[];
 
-      if (validUsersList.length) {
-        onAdd(validUsersList);
+        if (validUsersList.length) {
+          onAdd(validUsersList);
+        }
       }
     } catch (e) {
       setLoading(false);

@@ -1,0 +1,68 @@
+@import '../../components/variables';
+
+.dropdown {
+  width: 300px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.dropdown-header {
+  padding: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+}
+
+.dropdown-body {
+  border-top: 1px solid #e5e8ec;
+  display: none;
+  background-color: $white;
+}
+
+.dropdown-body.open {
+  display: block;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 14;
+  top: 50px;
+}
+
+.dropdown-item {
+  padding: 10px;
+  &:hover {
+    cursor: pointer;
+    background-color: $lightgray;
+  }
+  &.selected {
+    background-color: $bluebg;
+  }
+  .title {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .sub {
+    margin-top: 5px;
+    font-size: 13px;
+    color: $gray;
+  }
+}
+
+.icon {
+  font-size: 20px;
+  color: $gray;
+  transform: rotate(180deg);
+  height: 20px;
+  transition: all 0.2s ease-in-out;
+  position: absolute;
+  right: -2px;
+  top: 28%;
+  height: 20px;
+}
+
+.icon.open {
+  transform: rotate(0deg);
+}
