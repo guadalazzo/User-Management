@@ -1,0 +1,17 @@
+name: Check TypeScript compilation
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+jobs:
+  typecheck:
+    name: Check TypeScript compilation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install packages
+        run: npm i
+      - name: Check TypeScript compilation
+        run: npm run tscheck
