@@ -18,6 +18,12 @@ Run react server
 yarn dev
 ```
 
+Unit Testing - Jest
+
+```bash
+yarn test
+```
+
 open: http://localhost:5174/
 
 # Cultivations admin
