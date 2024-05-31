@@ -54,7 +54,7 @@ export default function UserAddition({
     document.body.style.overflow = 'hidden';
     document.body.scrollTop = 0;
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = '';
       setCheckedItems({});
     };
     // on mount only
