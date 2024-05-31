@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCultivationUsers, deleteUserFromCultivation, getCultivationRoles } from '../../services';
+import { getCultivationUsers, deleteUserFromCultivation, getCultivationRoles } from '@/services';
 import { useParams } from 'react-router-dom';
-import { cultivation, cultivationUsers, reducer } from '../../types/index';
-import Table from './../../components/Table/Table';
-import UserView from '../../components/UserView/UserView';
-import UserAddition from '../../components/UserAddition/UserAddition';
-import RoleSelector from '../../components/RoleSelector/RoleSelector';
-import { ROLES } from '../../utils/consts';
-import { setRoles } from '../../store/cultivation';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import { racePromises } from '../../utils';
+import { cultivation, cultivationUsers, reducer } from '@/types/index';
+import Table from '@/components/Table/Table';
+import UserView from '@/components/UserView/UserView';
+import UserAddition from '@/components/UserAddition/UserAddition';
+import RoleSelector from '@/components/RoleSelector/RoleSelector';
+import { ROLES } from '@/utils/consts';
+import { setRoles } from '@/store/cultivation';
+import Breadcrumbs from '@/components/Breadcrumbs';
+import { racePromises } from '@/utils';
 
 import './style.scss';
 

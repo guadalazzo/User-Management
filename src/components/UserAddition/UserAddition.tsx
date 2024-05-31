@@ -1,11 +1,11 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { getUsers, addCultivationUsers } from '../../services';
-import { debounce } from '../../utils';
-import { Role, User, cultivationUsers, reducer } from '../../types/index';
-import UserView from '../UserView/UserView';
+import { getUsers, addCultivationUsers } from '@/services';
+import { debounce } from '@/utils';
+import { Role, User, cultivationUsers, reducer } from '@/types/index';
+import UserView from '@/components/UserView/UserView';
 import './style.scss';
-import { ROLES } from '../../utils/consts';
+import { ROLES } from '@/utils/consts';
 import { useSelector } from 'react-redux';
 
 export default function UserAddition({

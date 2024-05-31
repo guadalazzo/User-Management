@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { updateRole } from '../../services';
-import { Role, reducer } from '../../types/index';
+import { updateRole } from '@/services';
+import { Role, reducer } from '@/types';
 
 import './style.scss';
 

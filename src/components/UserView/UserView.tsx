@@ -1,4 +1,4 @@
-import { ROLES } from '../../utils/consts';
+import { ROLES } from '@/utils/consts';
 
 import './style.scss';
 

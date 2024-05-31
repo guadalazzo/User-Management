@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getCultivations } from '../../services';
-import { cultivation } from '../../types';
-import Table from './../../components/Table/Table';
-import { setCultivationsList, setCurrentCultivation } from '../../store/cultivation';
+import { getCultivations } from '@/services';
+import { cultivation } from '@/types';
+import Table from '@/components/Table/Table';
+import { setCultivationsList, setCurrentCultivation } from '@/store/cultivation';
 
 import './styles.scss';
 

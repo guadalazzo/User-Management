@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { cultivation, Role } from '../../types';
+import { cultivation, Role } from '@/types';
 
 export const cultivationReducer = createSlice({
   name: 'cultivationReducer',
