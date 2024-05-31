@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getCultivationUsers, deleteUserFromCultivation, getCultivationRoles } from '../../services';
 import { useParams } from 'react-router-dom';
-import { cultivationUsers } from '../../types/index';
+import { cultivation, cultivationUsers, reducer } from '../../types/index';
 import Table from './../../components/Table/Table';
 import UserView from '../../components/UserView/UserView';
 import UserAddition from '../../components/UserAddition/UserAddition';
@@ -10,6 +10,7 @@ import RoleSelector from '../../components/RoleSelector/RoleSelector';
 import { ROLES } from '../../utils/consts';
 import { setRoles } from '../../store/cultivation';
 import Breadcrumbs from '../../components/Breadcrumbs';
+import { racePromises } from '../../utils';
 
 import './style.scss';
 
@@ -20,6 +21,8 @@ export default function EditCultivation() {
   const [toggleUserAddition, setToggleUserAddition] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const currentCultivation = useSelector<reducer>((state) => state.cultivations.currentCultivation) as cultivation;
+
   const dispatch = useDispatch();
 
   // Load cultivation by id
@@ -44,34 +47,38 @@ export default function EditCultivation() {
   const handleClose = () => {
     setToggleUserAddition(false);
   };
-
+  const reset = () => {
+    setToggleUserAddition(false);
+    setErrorMessage('');
+  };
   const handleAdd = (usersList: cultivationUsers[]) => {
     // Update with the new users
     setCultivationUsers((prevCultivationUsers) => [...prevCultivationUsers, ...usersList]);
-    setToggleUserAddition(false);
-    setErrorMessage('');
+    reset();
   };
 
   const handleDelete = async (userId: number) => {
     try {
       setErrorMessage('');
-      setLoading(true);
       if (id) {
-        const response = await deleteUserFromCultivation(id, userId);
+        const deletePromise = deleteUserFromCultivation(id, userId);
+        // Only show loading when exceeds 300ms
+        await racePromises(setLoading, [deletePromise], 300);
 
-        if ('message' in response && response.message) {
+        const resolvedResponse = await deletePromise;
+
+        if (resolvedResponse && resolvedResponse.message) {
           const filterCultivationUsers = cultivationUsers.filter(
             (cultivationUser) => cultivationUser.user.id !== userId,
           );
           setCultivationUsers([...filterCultivationUsers]);
-        } else if ('error' in response && response.error?.message) {
-          setErrorMessage(response.error.message);
+        } else if (resolvedResponse && resolvedResponse.error && resolvedResponse.error.message) {
+          setErrorMessage(resolvedResponse.error.message);
         }
       }
     } catch (e) {
+      setErrorMessage('Error deleting user.');
       console.error('Error deleting user:', e);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -92,8 +99,7 @@ export default function EditCultivation() {
     getRoles();
     return () => {
       // on unmount
-      setErrorMessage('');
-      setToggleUserAddition(false);
+      reset();
     };
   }, []);
 
@@ -101,12 +107,14 @@ export default function EditCultivation() {
     <article className="main-content">
       <Breadcrumbs name={'Edit'} />
       <section className="card">
-        <h2>Cultivation team</h2>
+        <h2>
+          Cultivation team: <span className="card-name">{currentCultivation.name}</span>
+        </h2>
         <div className="content">
           {loading && <span>Deleting User</span>}
           {errorMessage && <span className="error-message">{errorMessage}</span>}
           {!cultivationUsers.length ? (
-            <> No cultivation Users</>
+            <div className="empty"> No cultivation Users</div>
           ) : (
             <Table columns={['Name', 'Cultivation role', '']}>
               {cultivationUsers.map(({ user, role }, index) => {

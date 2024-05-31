@@ -27,6 +27,8 @@ export type addUserPayload = {
 };
 export type CultivationReducer = {
   roles: Role[];
+  cultivations: cultivation[];
+  currentCultivation: cultivation;
 };
 export interface reducer {
   cultivations: CultivationReducer;

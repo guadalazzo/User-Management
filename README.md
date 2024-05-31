@@ -1,4 +1,6 @@
-# source-assignment-frontend-engineer
+# [source-assignment-frontend-engineer](https://source-ag-frontend.netlify.app/)
+
+Project deployed into https://source-ag-frontend.netlify.app/
 
 To manage a cultivation in the greenhouse, users can be assigned to a cultivation. Depending on their role, they have certain permissions on the cultivation.
 
@@ -18,13 +20,13 @@ Run react server
 yarn dev
 ```
 
+open: http://localhost:5174/
+
 Unit Testing - Jest
 
 ```bash
 yarn test
 ```
-
-open: http://localhost:5174/
 
 # Cultivations admin
 

@@ -29,7 +29,7 @@ describe('Service API Functions', () => {
   };
 
   it('getCultivations should fetch cultivations successfully', async () => {
-    const mockResponse = [{ id: '1', name: 'Cultivation 1' }];
+    const mockResponse = [{ id: '1', name: 'Cultivation Name' }];
     mockFetch.mockResolvedValueOnce(mockFetchResponse(mockResponse));
     const cultivations = await getCultivations();
     expect(cultivations).toEqual(mockResponse);
@@ -37,7 +37,7 @@ describe('Service API Functions', () => {
   });
 
   it('getCultivationUsers should fetch cultivation users successfully', async () => {
-    const mockResponse = [{ id: '1', name: 'User 1' }];
+    const mockResponse = [{ id: '1', name: 'Cultivation name' }];
     mockFetch.mockResolvedValueOnce(mockFetchResponse(mockResponse));
     const cultivationUsers = await getCultivationUsers('1');
     expect(cultivationUsers).toEqual(mockResponse);
@@ -74,7 +74,7 @@ describe('Service API Functions', () => {
   });
 
   it('getUsers should fetch users successfully', async () => {
-    const mockResponse = [{ id: '1', name: 'User 1' }];
+    const mockResponse = [{ id: '1', name: 'Cultivation name' }];
     mockFetch.mockResolvedValueOnce(mockFetchResponse(mockResponse));
     const users = await getUsers();
     expect(users).toEqual(mockResponse);

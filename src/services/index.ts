@@ -1,6 +1,9 @@
 import { API_URL, headers, METHODS } from '../utils/consts';
 import { addUserPayload } from '../types';
 
+/**
+ *  list all known cultivations
+ */
 export const getCultivations = async () => {
   try {
     const cultivationResponse = await fetch(`${API_URL}/cultivations`);
@@ -11,6 +14,11 @@ export const getCultivations = async () => {
   }
 };
 
+/**
+ * get a list of users with roles for the cultivation.
+ * @param id string
+ * @returns Promise
+ */
 export const getCultivationUsers = async (id: string) => {
   try {
     const cultivationUsers = await fetch(`${API_URL}/cultivations/${id}/users`);
@@ -20,7 +28,12 @@ export const getCultivationUsers = async (id: string) => {
     console.error('error:', e);
   }
 };
-
+/**
+ * add a user to the cultivation.
+ * @param cultivation_id string
+ * @param payload addUserPayload
+ * @returns Promise
+ */
 export const addCultivationUsers = async (cultivation_id: string, payload: addUserPayload) => {
   try {
     const requestOptions = {
@@ -37,6 +50,12 @@ export const addCultivationUsers = async (cultivation_id: string, payload: addUs
   }
 };
 
+/**
+ * Remove a user from a cultivation
+ * @param cultivation_id string
+ * @param userId number
+ * @returns Promise
+ */
 export const deleteUserFromCultivation = async (cultivation_id: string, userId: number) => {
   try {
     const cultivationUsers = await fetch(`${API_URL}/cultivations/${cultivation_id}/users/${userId}`, {
@@ -53,6 +72,10 @@ export const deleteUserFromCultivation = async (cultivation_id: string, userId: 
   }
 };
 
+/**
+ * Get a list of all users
+ * @returns Promise
+ */
 export const getUsers = async () => {
   try {
     const users = await fetch(`${API_URL}/users`);
@@ -63,6 +86,10 @@ export const getUsers = async () => {
   }
 };
 
+/**
+ * Get a list of cultivation roles
+ * @returns Promise
+ */
 export const getCultivationRoles = async () => {
   try {
     const roles = await fetch(`${API_URL}/cultivation-roles`);
@@ -72,10 +99,14 @@ export const getCultivationRoles = async () => {
     console.error('error:', e);
   }
 };
-
+/**
+ * @param cultivation_id string
+ * @param payload {role: { id:number } }
+ * @param userId number
+ * Update the role of a user in the cultivation.
+ * @returns Promise
+ */
 export const updateRole = async (cultivation_id: string, payload: { role: { id: number } }, userId: number) => {
-  //PUT /cultivations/<cultivation_id>/users/<user_id>: update the role of a user in the cultivation.
-
   try {
     const requestOptions = {
       ...headers,

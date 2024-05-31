@@ -39,7 +39,9 @@ export default function UserAddition({
   const loadAllUsers = async () => {
     try {
       setLoading(true);
+      // Bring all the users
       const data = await getUsers();
+      // Remove the ones are already in the cultivation
       excludeCurrentUsers(data);
     } catch (e) {
       console.error('Failed to load users:', e);
@@ -99,7 +101,8 @@ export default function UserAddition({
           user: { id: Number(userId) },
         }));
 
-        // map over payloads and use Promise.all to wait for all async calls to complete
+        // Map over payloads and use Promise.all to wait for all async calls to complete
+        // As there is no way to send an array of users, we have to add them individually
         const usersList = await Promise.all(
           payloads.map(async (payload) => {
             if (id) {
