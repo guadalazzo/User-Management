@@ -163,7 +163,7 @@ export default function UserAddition({
             placeholder="Search teammember"
           />
           <button type="submit">
-            <img src="../public/assets/search.svg" alt="search"></img>
+            <img src="/assets/search.svg" alt="search"></img>
           </button>
         </label>
         <div className="content">
