@@ -117,7 +117,9 @@ export default function UserAddition({
                 if (userAdded.cultivation_id) {
                   return userAdded;
                 } else {
-                  setErrorMessage(userAdded?.error);
+                  if (userAdded?.error?.message) {
+                    setErrorMessage(`${userAdded.error.message}`);
+                  }
                 }
               } catch (e) {
                 setErrorMessage(`${e}`);
@@ -137,6 +139,8 @@ export default function UserAddition({
       setLoading(false);
       setErrorMessage(`${e}`);
       console.error('Error adding the user:', e);
+    } finally {
+      setLoading(false);
     }
   };
 
