@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getCultivations } from '@/services';
-import { cultivation } from '@/types';
+import { Cultivation } from '@/types';
 import Table from '@/components/Table/Table';
 import { setCultivationsList, setCurrentCultivation } from '@/store/cultivation';
 
 import './styles.scss';
 
 export default function Cultivations() {
-  const [cultivations, setCultivations] = useState<cultivation[]>([]);
+  const [cultivations, setCultivations] = useState<Cultivation[]>([]);
   const dispatch = useDispatch();
 
   // Load Cultivations, updates local an global state
@@ -26,9 +26,11 @@ export default function Cultivations() {
 
   useEffect(() => {
     loadCultivations();
+    // only on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleClick = (currentCultivation: cultivation) => {
+  const handleClick = (currentCultivation: Cultivation) => {
     dispatch(setCurrentCultivation(currentCultivation));
   };
   return (

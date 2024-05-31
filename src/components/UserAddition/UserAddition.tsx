@@ -1,8 +1,8 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUsers, addCultivationUsers } from '@/services';
 import { debounce } from '@/utils';
-import { Role, User, cultivationUsers, reducer } from '@/types/index';
+import { Role, User, CultivationUser, reducer } from '@/types/index';
 import UserView from '@/components/UserView/UserView';
 import './style.scss';
 import { ROLES } from '@/utils/consts';
@@ -13,9 +13,9 @@ export default function UserAddition({
   onClose,
   onAdd,
 }: {
-  currentUsers: cultivationUsers[];
+  currentUsers: CultivationUser[];
   onClose: () => void;
-  onAdd: (usersList: cultivationUsers[]) => void;
+  onAdd: (_: CultivationUser[]) => void;
 }) {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -57,6 +57,8 @@ export default function UserAddition({
       document.body.style.overflow = 'auto';
       setCheckedItems({});
     };
+    // on mount only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,17 +68,20 @@ export default function UserAddition({
     });
   };
 
-  const filterUsers = (name: string) => {
-    const lowerCaseName = name.toLowerCase();
-    const filteredUsers = users.filter((user) => {
-      const lowerCaseMissionName = user.name.toLowerCase();
-      return lowerCaseMissionName.includes(lowerCaseName);
-    });
-    setUsersFiltered(filteredUsers);
-  };
+  const filterUsers = useCallback(
+    (name: string) => {
+      const lowerCaseName = name.toLowerCase();
+      const filteredUsers = users.filter((user) => {
+        const lowerCaseMissionName = user.name.toLowerCase();
+        return lowerCaseMissionName.includes(lowerCaseName);
+      });
+      setUsersFiltered(filteredUsers);
+    },
+    [users],
+  );
 
   // Delays the new filter call 400 sec
-  const debouncedFilterUsers = useMemo(() => debounce(filterUsers, 400), [userName]);
+  const debouncedFilterUsers = useMemo(() => debounce(filterUsers, 400), [filterUsers]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (typeof e.target.value === 'string') {
@@ -122,7 +127,7 @@ export default function UserAddition({
           }),
         );
         // Update list to update edit page
-        const validUsersList = usersList.filter(Boolean) as cultivationUsers[];
+        const validUsersList = usersList.filter(Boolean) as CultivationUser[];
 
         if (validUsersList.length) {
           onAdd(validUsersList);

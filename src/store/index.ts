@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import cultivationReducer from './cultivation';
+import cultivationReducerA from './cultivation';
 
 export default configureStore({
   reducer: {
-    cultivations: cultivationReducer,
+    cultivations: cultivationReducerA,
   },
 });

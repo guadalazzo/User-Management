@@ -13,7 +13,7 @@ export default function RoleSelector({
 }: {
   name: string;
   userId: number;
-  onChange: (message?: string) => void;
+  onChange: (_?: string) => void;
 }) {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [cultivationRoles, setcultivationRoles] = useState<Role[]>([]);
@@ -33,6 +33,8 @@ export default function RoleSelector({
     return () => {
       setOpen(false);
     };
+    // just on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleDropdown = () => setOpen(!isOpen);
@@ -59,7 +61,7 @@ export default function RoleSelector({
 
   return (
     <div className="dropdown">
-      <div className="dropdown-header" onClick={toggleDropdown}>
+      <div className="dropdown-header" onClick={toggleDropdown} role="presentation">
         {selectedItem !== null
           ? cultivationRoles.find((cultivationRole) => cultivationRole.id === selectedItem.id)?.name
           : name}
@@ -71,6 +73,7 @@ export default function RoleSelector({
             className={`dropdown-item ${cultivationRole.id === selectedItem?.id && 'selected'}`}
             key={cultivationRole.id}
             onClick={() => handleDropdownClick(cultivationRole.id)}
+            role="presentation"
           >
             <p className="title">{cultivationRole.name}</p>
             <p className="sub">{cultivationRole.description}</p>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCultivationUsers, deleteUserFromCultivation, getCultivationRoles } from '@/services';
 import { useParams } from 'react-router-dom';
-import { cultivation, cultivationUsers, reducer } from '@/types/index';
+import { Cultivation, CultivationUser, reducer } from '@/types/index';
 import Table from '@/components/Table/Table';
 import UserView from '@/components/UserView/UserView';
 import UserAddition from '@/components/UserAddition/UserAddition';
@@ -17,11 +17,11 @@ import './style.scss';
 export default function EditCultivation() {
   const { id } = useParams();
 
-  const [cultivationUsers, setCultivationUsers] = useState<cultivationUsers[]>([]);
+  const [cultivationUsers, setCultivationUsers] = useState<CultivationUser[]>([]);
   const [toggleUserAddition, setToggleUserAddition] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const currentCultivation = useSelector<reducer>((state) => state.cultivations.currentCultivation) as cultivation;
+  const currentCultivation = useSelector<reducer>((state) => state.cultivations.currentCultivation) as Cultivation;
 
   const dispatch = useDispatch();
 
@@ -51,7 +51,7 @@ export default function EditCultivation() {
     setToggleUserAddition(false);
     setErrorMessage('');
   };
-  const handleAdd = (usersList: cultivationUsers[]) => {
+  const handleAdd = (usersList: CultivationUser[]) => {
     // Update with the new users
     setCultivationUsers((prevCultivationUsers) => [...prevCultivationUsers, ...usersList]);
     reset();
@@ -101,6 +101,8 @@ export default function EditCultivation() {
       // on unmount
       reset();
     };
+    // only on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

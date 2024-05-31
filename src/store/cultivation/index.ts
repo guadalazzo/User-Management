@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { cultivation, Role } from '@/types';
+import { Cultivation, Role } from '@/types';
 
 export const cultivationReducer = createSlice({
   name: 'cultivationReducer',
   initialState: {
     roles: [] as Role[],
-    cultivations: [] as cultivation[],
-    currentCultivation: {} as cultivation,
+    cultivations: [] as Cultivation[],
+    currentCultivation: {} as Cultivation,
   },
   reducers: {
     setRoles: (state, action) => {

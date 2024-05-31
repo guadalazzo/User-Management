@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
@@ -28,7 +29,7 @@ describe('Cultivations', () => {
     store = mockStore({
       // Add your initial Redux state here if necessary
     });
-    (global as any).fetch = mockFetch;
+    (global as unknown).fetch = mockFetch;
 
     jest.clearAllMocks();
   });

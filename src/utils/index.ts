@@ -1,7 +1,5 @@
-export function debounce<T extends (...args: any[]) => any>(
-  callback: T,
-  wait: number,
-): (...args: Parameters<T>) => void {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function debounce<T extends (..._: any[]) => any>(callback: T, wait: number): (..._: Parameters<T>) => void {
   let timeoutId: number | null = null;
   return (...args: Parameters<T>) => {
     if (timeoutId !== null) {
@@ -21,8 +19,8 @@ Races multiple promises against a timeout and sets a value if the timeout wins.
 @returns Promise
 */
 export async function racePromises(
-  setLoadingValue: (arg0: boolean) => void,
-  promisesToRace: Promise<any>[],
+  setLoadingValue: (_: boolean) => void,
+  promisesToRace: Promise<unknown>[],
   time: number,
 ) {
   try {

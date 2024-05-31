@@ -1,4 +1,4 @@
-export type cultivation = {
+export type Cultivation = {
   id: string;
   name: string;
 };
@@ -11,7 +11,7 @@ export type User = {
   id: number;
   name: string;
 };
-export type cultivationUsers = {
+export type CultivationUser = {
   cultivation_id: string;
   role: Role;
   user: User;
@@ -27,8 +27,8 @@ export type addUserPayload = {
 };
 export type CultivationReducer = {
   roles: Role[];
-  cultivations: cultivation[];
-  currentCultivation: cultivation;
+  cultivations: Cultivation[];
+  currentCultivation: Cultivation;
 };
 export interface reducer {
   cultivations: CultivationReducer;

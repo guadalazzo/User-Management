@@ -1,6 +1,7 @@
+import { ReactNode } from 'react';
 import './style.scss';
 
-export default function Table({ columns, children }: { columns: string[]; children: any }) {
+export default function Table({ columns, children }: { columns: string[]; children: ReactNode }) {
   return (
     <table className="cultivations-table">
       <thead>
