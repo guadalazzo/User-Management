@@ -80,7 +80,7 @@ export default function UserAddition({
     [users],
   );
 
-  // Delays the new filter call 400 sec
+  // Delays the new filter call 400ms
   const debouncedFilterUsers = useMemo(() => debounce(filterUsers, 400), [filterUsers]);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {

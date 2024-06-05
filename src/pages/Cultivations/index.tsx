@@ -12,7 +12,7 @@ export default function Cultivations() {
   const [cultivations, setCultivations] = useState<Cultivation[]>([]);
   const dispatch = useDispatch();
 
-  // Load Cultivations, updates local an global state
+  // Load Cultivations, updates local and global state
   const loadCultivations = async () => {
     try {
       // Get cultivations list
