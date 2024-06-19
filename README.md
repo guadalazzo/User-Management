@@ -1,6 +1,8 @@
 # User managment
 
-To manage a cultivation in the greenhouse, users can be assigned to a cultivation. Depending on their role, they have certain permissions on the cultivation.
+Uploaded in: user-managment-config.netlify.app
+
+User config managment for teams, with role handling
 
 ## Start the project
 
