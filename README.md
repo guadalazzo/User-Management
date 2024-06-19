@@ -1,6 +1,6 @@
 # User managment
 
-Uploaded in: user-managment-config.netlify.app
+Uploaded in: [user-managment-config.netlify.app](https://user-managment-config.netlify.app/)
 
 User config managment for teams, with role handling
 
