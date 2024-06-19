@@ -8,8 +8,10 @@ import {
   getCultivationRoles,
   updateRole,
 } from '../../services';
-import { API_URL, METHODS, headers } from '../../utils/consts';
+import { METHODS, headers } from '../../utils/consts';
 import { addUserPayload } from '../../types';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 describe('Service API Functions', () => {
   beforeEach(() => {

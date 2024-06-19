@@ -1,5 +1,7 @@
-import { API_URL, headers, METHODS } from '../utils/consts';
+import { headers, METHODS } from '../utils/consts';
 import { addUserPayload } from '../types';
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 /**
  *  list all known cultivations

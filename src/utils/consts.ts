@@ -1,5 +1,3 @@
-export const API_URL = 'https://14dtv3lu9k.execute-api.eu-central-1.amazonaws.com';
-
 export const headers = {
   headers: { 'Content-Type': 'application/json' },
 };
