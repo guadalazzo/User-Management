@@ -1,6 +1,4 @@
-# [source-assignment-frontend-engineer](https://source-ag-frontend.netlify.app/)
-
-Project deployed into https://source-ag-frontend.netlify.app/
+# User managment
 
 To manage a cultivation in the greenhouse, users can be assigned to a cultivation. Depending on their role, they have certain permissions on the cultivation.
 
